@@ -1,0 +1,21 @@
+{
+  "name": "tictactoe-multiplay-backend",
+  "version": "1.0.0",
+  "description": "Tic-tac-toe multiplayer backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node .",
+    "dev": "nodemon index.js --exec babel-node"
+  },
+  "author": "Alfie Tham",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^1.17.5"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "socket.io": "^2.1.1"
+  }
+}
