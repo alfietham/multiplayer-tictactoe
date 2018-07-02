@@ -8,7 +8,7 @@ let app = express();
 let server = http.createServer(app);
 let io = new SocketIO(server);
 
-app.get('/', (req, res) => {
+app.get('/ping', (req, res) => {
   res.json({ hello: 'world' });
 });
 

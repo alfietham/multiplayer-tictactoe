@@ -1,0 +1,81 @@
+body {
+  font-size: 5vmin;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.app-title {
+  font-size: 7vmin;
+  width: 13em;
+  margin: 1em auto 1em auto;
+}
+
+/* Portrait */
+@media screen and (orientation:portrait) {
+  .app-title {
+    font-size: 7vmin;
+    width: 13em;
+    margin: 1em auto 1em auto;
+  }
+  .game {
+    margin: auto;
+  }  
+}
+/* Landscape */
+@media screen and (orientation:landscape) {
+  .app-title {
+    position: absolute;
+    font-size: 7vmin;
+    width: 13em;
+    transform: rotate(-90deg) translate(-103%, 30%);
+    transform-origin: 0 0;
+    margin: auto 0 auto 0;
+  }
+  .game {
+    padding-top: 7vh;
+  }
+}
+
+.game-status {
+  padding-bottom: 1em;
+  text-align: center;
+}
+
+.board {
+  width: 55vmin;
+  height: 55vmin;
+  margin: auto;
+}
+
+.square {
+  background: #fff;
+  border: 1px solid #999;
+  height: 33%;
+  width: 33%;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  float: left;
+  font-size: 3em;    
+  font-weight: 500;
+  text-align: center;
+}
+
+.square:focus {
+  outline: none;
+}
+
+.rematch-button {
+  height: 7vmin;
+  width: 50vmin;
+  margin: 5vmin auto 5vmin auto;
+  text-align: center;
+  padding: 2vmin;
+  background-color: #888888;
+  color: #fff;
+  box-shadow: 5px 5px 6px 0px #d8d8d8;
+  border-radius: 0.3em;
+}
+
+.rematch-button:focus {
+  outline: none;
+}
