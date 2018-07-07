@@ -6,12 +6,13 @@ import {
   disconnectSocket,
   joiningGameSocket,
 } from './common/socketutils';
-import { AppState } from './common/types';
+import { AppState } from '../../types/index';
 import Lobby from './components/lobby';
 
 const initialAppState = {
   waitingToJoinGame: false,
   joinedGame: false,
+  playerSide: null
 };
 
 export class App extends React.Component<any, AppState> {
@@ -34,12 +35,13 @@ export class App extends React.Component<any, AppState> {
         })
       );
 
-      joiningGameSocket().then(msg => {
-        console.log('joiningGameSocket msg:', msg);
+      joiningGameSocket().then(player => {
+        console.log('joiningGameSocket player:', player);
         this.setState(
           Object.assign(this.state, {
             waitingToJoinGame: false,
             joinedGame: true,
+            playerSide: player
           })
         );
       });
@@ -49,7 +51,7 @@ export class App extends React.Component<any, AppState> {
       <div className="app">
         <div className="app-title">React Typescript Tic-tac-toe!</div>
         {this.state.joinedGame ? (
-          <Game />
+          <Game playerSide={this.state.playerSide}/>
         ) : (
           <Lobby
             joinGame={() => joinGame()}

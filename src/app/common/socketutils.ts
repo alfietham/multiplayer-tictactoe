@@ -1,4 +1,5 @@
 import * as openSocket from 'socket.io-client';
+import { MovePayload, GameState } from '../../../types/index';
 
 const socket = openSocket('http://localhost:3000');
 
@@ -25,3 +26,17 @@ export const joiningGameSocket = () => {
     socket.on('joined game success', resolve);
   });
 };
+
+export const makeMoveSocket = (movePayload: MovePayload) => {
+  socket.emit('game action', {id: socket.id, movePayload: movePayload});
+  return new Promise(resolve => {
+    socket.on('game action response', resolve);
+  });
+}
+
+export const getInitialStateSocket: (() => Promise<GameState>) = () => {
+  socket.emit('get initial state', socket.id);
+  return new Promise(resolve => {
+    socket.on('get initial state response', resolve);
+  });
+}

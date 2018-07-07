@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import Square from './square';
-import { HandleClick, GameState } from '../common/types';
+import { HandleClick, GameState } from '../../../types/index';
 
 const Board: (
   {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { GameBoxContent } from '../common/types';
+import { GameBoxContent } from '../../../types/index';
 
 const Square: (
   { content, handleClick }: { content: GameBoxContent; handleClick: () => void }

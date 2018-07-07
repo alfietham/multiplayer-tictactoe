@@ -1,8 +1,8 @@
 module.exports = {
-  entry: './app/index.tsx',
+  entry: './src/app/index.tsx',
   output: {
     filename: 'bundle.js',
-    path: __dirname + '/dist',
+    path: __dirname + '/dist/app',
   },
   devtool: 'source-map',
   resolve: {

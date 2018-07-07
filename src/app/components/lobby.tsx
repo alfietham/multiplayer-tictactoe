@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { JoinGame } from '../common/types';
+import { JoinGame } from '../../../types/index';
 
 const Lobby: (
   {
