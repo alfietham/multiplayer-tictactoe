@@ -1,7 +1,7 @@
 import * as openSocket from 'socket.io-client';
-import { MovePayload, GameState } from '../../../types/index';
+import { MovePayload } from '../../../types/index';
 
-const socket = openSocket('http://localhost:3000');
+const socket = openSocket(location.origin || 'http://localhost:3000');
 
 const onConnect = () => {
   console.log('connected as ' + socket.id);
@@ -27,16 +27,16 @@ export const joiningGameSocket = () => {
   });
 };
 
-export const makeMoveSocket = (movePayload: MovePayload) => {
-  socket.emit('game action', {id: socket.id, movePayload: movePayload});
-  return new Promise(resolve => {
+export const makeMoveSocket = (movePayload: MovePayload) =>
+  socket.emit('game action', { id: socket.id, movePayload: movePayload });
+
+export const listenForChanges = () =>
+  new Promise(resolve => {
     socket.on('game action response', resolve);
   });
-}
 
-export const getInitialStateSocket: (() => Promise<GameState>) = () => {
-  socket.emit('get initial state', socket.id);
+export const handleOtherPlayerDisconnectSocket = () => {
   return new Promise(resolve => {
-    socket.on('get initial state response', resolve);
+    socket.on('other player disconnected', resolve);
   });
-}
+};

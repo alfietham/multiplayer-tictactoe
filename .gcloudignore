@@ -1,0 +1,11 @@
+.gcloudignore
+.git
+.gitignore
+node_modules/
+
+src/
+types/
+README.md
+.babelrc
+app_webpack.config.js
+tsconfig.json

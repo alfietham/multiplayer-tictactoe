@@ -1,6 +1,6 @@
 # Multiplayer Tic-Tac-Toe
 
-## Features
+## Notes
 
 - React and Typescript Frontend
 
@@ -10,29 +10,41 @@
 
 ## Quick Start
 
-Have webpack installed globally to use webpack
+First, have webpack installed globally to use webpack
 - `npm install -g webpack webpack-cli`
 
 ### Develop
 
 - `npm install`
-- `npm run devstart-app`
+- `npm run dev-app`
 - `npm run dev-server`
+- Go to `localhost:3000`
 
-**Note**: Dependencies in /dist and /src `index.html` files have different source links. 
+### Build and run locally
 
-@TODO: Update build
-<!-- ### Build and run
+- `npm run build-all`
+- run built server: `npm start`
 
-- `npm run build`
-- Deploy and serve static files (e.g. using `pushstate-server`)
+### Deploy to GCP
 
-**Note**: Build only updates JS and CSS in the /dist folder (not html). -->
+- `npm run deploy`
 
-## Update GitHub pages
+### Deploy manually to a server
 
-`git subtree push --prefix dist origin gh-pages`
+- Copy `dist/`, `package.json`, and `package-lock.json` to target server
+- `npm install`
+- `npm start`
 
 ## Reference
 
 Tic-tac-toe inspired by the intro to React tutorial: https://reactjs.org/tutorial/tutorial.html
+
+## To-do list
+
+### Next release
+- Complete endgame MP WS handling (rematch)
+- Styling for Join Game and Lobby
+
+### Future
+- Game handling in an Elixir app
+- Separate, more robust memory storage for game states (e.g. Redis)

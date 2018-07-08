@@ -1,16 +1,18 @@
 {
   "name": "tictactoe-multiplayer",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "Tic-tac-toe multiplayer frontend and backend",
   "main": "./src/server/index.ts",
   "scripts": {
-    "start": "babel-node --presets @babel/preset-typescript --extensions \".ts\" ./src/server/index.ts",
+    "start": "node ./dist/server/index.js",
     "dev-server": "nodemon --watch ./src/server ./src/server/index.ts --exec babel-node --extensions \".ts\"",
     "build-server": "babel ./src/server --out-dir dist/server --extensions \".ts\"",
     "dev-app": "webpack --config app_webpack.config.js --watch",
     "start-app": "start ./src/app/index.html",
     "devstart-app": "npm run start-app && npm run dev-app",
-    "build-app": "webpack --config app_webpack.config.js && cp ./src/app/styles.css ./dist/app/ && cp ./src/app/index.html ./dist/app/"
+    "build-app": "webpack --config app_webpack.config.js && cp ./src/app/styles.css ./dist/app/ && cp ./src/app/index.html ./dist/app/",
+    "build-all": "npm run build-app && npm run build-server",
+    "deploy": "npm run build-all && gcloud app deploy"
   },
   "author": "Alfie Tham",
   "dependencies": {

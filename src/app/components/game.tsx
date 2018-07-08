@@ -1,44 +1,56 @@
 import * as React from 'react';
 
 import Board from './board';
-import { GameBoxContent, HandleClick, GameState } from '../../../types/index';
-import { makeMoveSocket, getInitialStateSocket } from '../common/socketutils';
+import {
+  GameBoxContent,
+  HandleClick,
+  GameState,
+  players,
+} from '../../../types/index';
+import { makeMoveSocket, listenForChanges } from '../common/socketutils';
 
-let initialBoardState: GameState;
+let initialBoardState: GameState = {
+  gameBoard: [null, null, null, null, null, null, null, null, null],
+  nextTurn: 'X',
+  winner: null,
+  isBoardFull: false,
+};
 
-class Game extends React.Component<any, GameState> {
+class Game extends React.Component<{ playerSide: players }, GameState> {
   constructor(props: any) {
     super(props);
-    
-    getInitialStateSocket().then(initialState => {
-      initialBoardState = initialState;
-      this.state = initialState;
-    });
+
+    this.state = initialBoardState;
   }
 
   handleClick: HandleClick = value => {
-    // Process click if it is the current player's turn
-    if (this.state.nextTurn === this.props.playerSide) {
+    // Process click if it is the current player's turn,
+    // And if the game has not ended, and board is not full
+    if (
+      this.state.nextTurn === this.props.playerSide &&
+      this.state.winner === null &&
+      !this.state.isBoardFull
+    ) {
       // Send value to server
-      makeMoveSocket({ move: value, player: this.props.playerSide })
-        // handle game board and turn
-        .then(
-          ({ currentGameBoard, winner, nextTurn, isBoardFull }: GameState) => {
-            this.setState({
-              currentGameBoard: currentGameBoard,
-              nextTurn: nextTurn,
-              winner: winner,
-              isBoardFull: isBoardFull,
-            });
-          }
-        );
+      makeMoveSocket({ move: value, player: this.props.playerSide });
     }
   };
 
-  resetBoard: () => void = () => this.setState(initialBoardState);
+  initiateRematch: () => void = () => this.setState(initialBoardState);
 
   render() {
-    const currentBoard = this.state.currentGameBoard;
+    listenForChanges().then(
+      ({ gameBoard, winner, nextTurn, isBoardFull }: GameState) => {
+        this.setState({
+          gameBoard: gameBoard,
+          nextTurn: nextTurn,
+          winner: winner,
+          isBoardFull: isBoardFull,
+        });
+      }
+    );
+
+    const currentBoard = this.state.gameBoard;
     const winner: GameBoxContent = this.state.winner;
 
     let status: string;
@@ -46,8 +58,10 @@ class Game extends React.Component<any, GameState> {
       status = 'Winner: ' + winner;
     } else if (this.state.isBoardFull) {
       status = 'Draw.';
+    } else if (this.state.nextTurn === this.props.playerSide) {
+      status = 'Your turn';
     } else {
-      status = 'Next player: ' + this.state.nextTurn;
+      status = `${this.state.nextTurn}'s turn`;
     }
 
     return (
@@ -55,10 +69,13 @@ class Game extends React.Component<any, GameState> {
         <div className="game-status">{status}</div>
         <Board
           handleClick={(value: number) => this.handleClick(value)}
-          currentGameBoard={currentBoard}
+          gameBoard={currentBoard}
         />
         {(!!winner || this.state.isBoardFull) && (
-          <div className="rematch-button" onClick={() => this.resetBoard()}>
+          <div
+            className="rematch-button"
+            onClick={() => this.initiateRematch()}
+          >
             REMATCH
           </div>
         )}

@@ -2,22 +2,30 @@ export type HandleClick = (value: number) => void;
 
 export type GameBoxContent = null | 'X' | 'O';
 
+type players = 'X' | 'O';
+
 export interface GameState {
-  currentGameBoard: GameBoxContent[];
+  gameBoard: GameBoxContent[];
   winner: GameBoxContent;
-  nextTurn: GameBoxContent;
+  nextTurn: players;
   isBoardFull: boolean
 }
 
 export interface AppState {
   waitingToJoinGame: boolean;
   joinedGame: boolean;
-  playerSide: GameBoxContent;
+  playerSide: players;
+  errorMessage: string;
 }
 
 export type JoinGame = () => void;
 
 export interface MovePayload {
   move: number;
-  player: GameBoxContent;
+  player: players;
+}
+
+interface GameInGamesList {
+  roomName: string;
+  currentBoardState: GameBoxContent[];
 }
