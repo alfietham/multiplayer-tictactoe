@@ -10,7 +10,7 @@
 
 ## Quick Start
 
-First, have webpack installed globally to use webpack
+Install webpack
 - `npm install -g webpack webpack-cli`
 
 ### Develop
@@ -43,7 +43,7 @@ Tic-tac-toe inspired by the intro to React tutorial: https://reactjs.org/tutoria
 
 ### Next release
 - Complete endgame MP WS handling (rematch)
-- Styling for Join Game and Lobby
+- Handle 'other player left' in Game screen
 
 ### Future
 - Game handling in an Elixir app

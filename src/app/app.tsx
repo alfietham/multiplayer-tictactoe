@@ -14,7 +14,7 @@ const initialAppState: AppState = {
   waitingToJoinGame: false,
   joinedGame: false,
   playerSide: 'X',
-  errorMessage: '',
+  errorMessage: undefined,
 };
 
 export class App extends React.Component<any, AppState> {
@@ -40,7 +40,7 @@ export class App extends React.Component<any, AppState> {
     const joinGame = () => {
       this.setState({
         waitingToJoinGame: true,
-        errorMessage: '',
+        errorMessage: undefined,
       });
 
       joiningGameSocket().then((player: players) => {
@@ -64,7 +64,9 @@ export class App extends React.Component<any, AppState> {
             waitingToJoinGame={this.state.waitingToJoinGame}
           />
         )}
-        <div>{this.state.errorMessage}</div>
+        {this.state.errorMessage !== undefined && (
+          <div className="app-error-text">{this.state.errorMessage}</div>
+        )}
       </div>
     );
   }

@@ -33,6 +33,6 @@ app.get('/resources/:req_resource', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT);
-console.info(`Server started at port: ${PORT}`);
+console.info(`[INFO] Server started at port: ${PORT}`);
 
 SocketsHandler(io);

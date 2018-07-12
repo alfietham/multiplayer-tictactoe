@@ -39,12 +39,12 @@ const matchPlayers: (socket: SocketIO.Socket) => void = socket => {
     // exchange names between the two of them and start the game
     peer.emit('joined game success', 'X');
     socket.emit('joined game success', 'O');
-    console.info(`Joined game success: ${socket.id} <-> ${peer.id}\n`);
-    console.info(`${roomNames.length} room(s) active\n`);
+    console.info(`[INFO] Joined game success: ${socket.id} <-> ${peer.id}\n`);
+    console.info(`[INFO] ${roomNames.length} room(s) active\n`);
   } else {
     // lobbyQueue is empty, add to queue
     lobbyQueue.set(socket.id, socket);
-    console.info(`${lobbyQueue.size} client(s) waiting for game\n`);
+    console.info(`[INFO] ${lobbyQueue.size} client(s) waiting for game\n`);
   }
 };
 
@@ -55,12 +55,12 @@ const handleClientDisconnectOnServer = socketConn => {
 };
 
 const socketsHandler: (io: SocketIO.Server) => void = io => {
-  console.info('Waiting for connection...');
+  console.info('[INFO] Waiting for connection...');
   io.on('connection', socketConn => {
-    console.info('Client connected:', socketConn.id);
+    console.info('[INFO] Client connected:', socketConn.id);
 
     socketConn.on('joining game', data => {
-      console.info('joining game. Finding pair for: ', data);
+      console.info('[INFO] joining game. Finding pair for: ', data);
       matchPlayers(socketConn);
     });
 
@@ -78,7 +78,7 @@ const socketsHandler: (io: SocketIO.Server) => void = io => {
     });
 
     socketConn.on('disconnect', () => {
-      console.info(`Client disconnected with ID: ${socketConn.id} \n`);
+      console.info(`[INFO] Client disconnected with ID: ${socketConn.id} \n`);
       io.to(getRoomName(socketConn.id)).emit('other player disconnected');
       handleClientDisconnectOnServer(socketConn);
     });

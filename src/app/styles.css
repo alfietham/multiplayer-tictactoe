@@ -7,31 +7,33 @@ body {
   font-size: 7vmin;
   width: 13em;
   margin: 1em auto 1em auto;
+  text-align: center;
+}
+
+.game {
+  padding-top: 10vh;
 }
 
 /* Portrait */
 @media screen and (orientation:portrait) {
   .app-title {
-    font-size: 7vmin;
-    width: 13em;
     margin: 1em auto 1em auto;
   }
-  .game {
-    margin: auto;
+  .lobby {
+    padding-top: 8vh;
   }  
 }
 /* Landscape */
 @media screen and (orientation:landscape) {
   .app-title {
     position: absolute;
-    font-size: 7vmin;
-    width: 13em;
+    margin: auto 0 auto 0;
     transform: rotate(-90deg) translate(-103%, 30%);
     transform-origin: 0 0;
-    margin: auto 0 auto 0;
   }
-  .game {
-    padding-top: 7vh;
+  
+  .lobby {
+    padding-top: 35vh;
   }
 }
 
@@ -64,7 +66,7 @@ body {
   outline: none;
 }
 
-.rematch-button {
+.rematch-button, .join-game-button {
   height: 7vmin;
   width: 50vmin;
   margin: 5vmin auto 5vmin auto;
@@ -78,4 +80,34 @@ body {
 
 .rematch-button:focus {
   outline: none;
+}
+
+.lobby-text {
+  text-align: center;
+  margin: 5vmin auto 5vmin auto;
+}
+
+.loader-ball {
+  background: rgb(218, 215, 209, 0.5);
+  border-radius: 50%;
+  height: 1em;
+  width: 1em;
+  margin-left: 20vw;
+  margin-top: 2em;
+  animation: zip 3.5s infinite cubic-bezier(0.65, 0.08, 0.27, 0.97);
+}
+
+@keyframes zip {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(52vw);
+  }
+}
+
+.app-error-text {
+  text-align: center;
+  margin: 12vmin auto 12vmin auto;
+  font-size: 4vmin;
 }

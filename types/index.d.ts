@@ -15,7 +15,7 @@ export interface AppState {
   waitingToJoinGame: boolean;
   joinedGame: boolean;
   playerSide: players;
-  errorMessage: string;
+  errorMessage: string | undefined;
 }
 
 export type JoinGame = () => void;

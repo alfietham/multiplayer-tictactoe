@@ -1,7 +1,7 @@
 import * as openSocket from 'socket.io-client';
 import { MovePayload } from '../../../types/index';
 
-const socket = openSocket(location.origin || 'http://localhost:3000');
+const socket = openSocket();
 
 const onConnect = () => {
   console.log('connected as ' + socket.id);

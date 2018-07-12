@@ -9,3 +9,5 @@ README.md
 .babelrc
 app_webpack.config.js
 tsconfig.json
+
+**/bundle.js.map
