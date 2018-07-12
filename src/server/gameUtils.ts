@@ -1,4 +1,4 @@
-import { GameBoxContent, MovePayload, GameState } from "../../types";
+import { GameBoxContent, MovePayload, GameState } from "../types";
 
 export const computeWinner: (
     current: GameBoxContent[]

@@ -1,4 +1,9 @@
-import { handleGameAction, createNewGame, deleteRoomsGame } from './gameMain';
+import { 
+  handleGameAction, 
+  createNewGame, 
+  deleteRoomsGame, 
+  handleRematch 
+} from './gameMain';
 
 interface RoomNames {
   ids: string[];
@@ -70,8 +75,22 @@ const socketsHandler: (io: SocketIO.Server) => void = io => {
       if (roomName) {
         handleGameAction(movePayload, roomName).then(gameUpdatePayload => {
           io.to(getRoomName(id)).emit(
-            'game action response',
+            'update game state',
             gameUpdatePayload
+          );
+        });
+      }
+    });
+
+    socketConn.on('iniitate rematch', (id) => {
+      let roomName = getRoomName(id);
+      console.info(`[INFO] Initiating rematch for room: ${roomName} \n`);
+      // if room no longer exists, don't proceed
+      if (roomName) {
+        handleRematch(roomName).then(newGameState => {
+          io.to(roomName).emit(
+            'update game state',
+            newGameState
           );
         });
       }

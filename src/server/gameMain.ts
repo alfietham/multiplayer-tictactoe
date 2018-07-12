@@ -9,7 +9,7 @@ import {
   MovePayload,
   GameState,
   GameInGamesList,
-} from '../../types/index';
+} from '../types';
 
 let gamesList: GameInGamesList[] = [];
 
@@ -47,6 +47,23 @@ export const handleGameAction: (
       winner: computeWinner(currentBoard),
       nextTurn: nextTurn,
       isBoardFull: isBoardFull(currentBoard),
+    });
+  });
+};
+
+export const handleRematch: (
+  roomName: string
+) => Promise<GameState> = (roomName) => {
+  // Reset server-side board state by ref
+  let currentGame = fetchGameFromList(roomName);
+  currentGame.currentBoardState = initialBoardState.gameBoard.slice();
+
+  return new Promise(resolve => {
+    resolve({
+      gameBoard: currentGame.currentBoardState,
+      nextTurn: initialBoardState.nextTurn,
+      winner: initialBoardState.winner,
+      isBoardFull: initialBoardState.isBoardFull,
     });
   });
 };

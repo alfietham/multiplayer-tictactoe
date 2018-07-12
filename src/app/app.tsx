@@ -6,8 +6,8 @@ import {
   disconnectSocket,
   joiningGameSocket,
   handleOtherPlayerDisconnectSocket,
-} from './common/socketutils';
-import { AppState, players } from '../../types/index';
+} from './utils/socketUtils';
+import { AppState, players } from '../types';
 import Lobby from './components/lobby';
 
 const initialAppState: AppState = {

@@ -1,5 +1,5 @@
 import * as openSocket from 'socket.io-client';
-import { MovePayload } from '../../../types/index';
+import { MovePayload } from '../../types';
 
 const socket = openSocket();
 
@@ -12,8 +12,6 @@ const onDisconnect = (reason: String) => {
 };
 
 export const connectSocket = () => {
-  console.log('init');
-
   socket.on('connect', onConnect);
   socket.on('disconnect', onDisconnect);
 };
@@ -32,7 +30,7 @@ export const makeMoveSocket = (movePayload: MovePayload) =>
 
 export const listenForChanges = () =>
   new Promise(resolve => {
-    socket.on('game action response', resolve);
+    socket.on('update game state', resolve);
   });
 
 export const handleOtherPlayerDisconnectSocket = () => {
@@ -40,3 +38,7 @@ export const handleOtherPlayerDisconnectSocket = () => {
     socket.on('other player disconnected', resolve);
   });
 };
+
+export const handleRematchSocket = () => {
+  socket.emit('iniitate rematch', socket.id);
+}

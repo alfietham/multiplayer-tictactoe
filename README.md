@@ -42,7 +42,6 @@ Tic-tac-toe inspired by the intro to React tutorial: https://reactjs.org/tutoria
 ## To-do list
 
 ### Next release
-- Complete endgame MP WS handling (rematch)
 - Handle 'other player left' in Game screen
 
 ### Future

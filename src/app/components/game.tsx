@@ -6,8 +6,12 @@ import {
   HandleClick,
   GameState,
   players,
-} from '../../../types/index';
-import { makeMoveSocket, listenForChanges } from '../common/socketutils';
+} from '../../types';
+import {
+  makeMoveSocket,
+  listenForChanges,
+  handleRematchSocket,
+} from '../utils/socketUtils';
 
 let initialBoardState: GameState = {
   gameBoard: [null, null, null, null, null, null, null, null, null],
@@ -36,7 +40,7 @@ class Game extends React.Component<{ playerSide: players }, GameState> {
     }
   };
 
-  initiateRematch: () => void = () => this.setState(initialBoardState);
+  initiateRematch: () => void = () => handleRematchSocket();
 
   render() {
     listenForChanges().then(
