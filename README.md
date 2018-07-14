@@ -8,10 +8,11 @@
 
 - WebSockets for comm
 
-## Quick Start
+## Try it out!
 
-Install webpack
-- `npm install -g webpack webpack-cli`
+Demo: http://multiplay-tictactoe.appspot.com/
+
+## Quick Start
 
 ### Develop
 
@@ -25,13 +26,15 @@ Install webpack
 - `npm run build-all`
 - run built server: `npm start`
 
-### Deploy to GCP
-
-- `npm run deploy`
-
 ### Deploy manually to a server
 
-- Copy `dist/`, `package.json`, and `package-lock.json` to target server
+Option 1:
+- Copy `dist/`, `package.json`, and `package-lock.json` to target VM
+- `npm install --production`
+- `npm start`
+
+Option 2:
+- Clone repo to targer VM
 - `npm install`
 - `npm start`
 
@@ -41,9 +44,11 @@ Tic-tac-toe inspired by the intro to React tutorial: https://reactjs.org/tutoria
 
 ## To-do list
 
-### Next release
+### Micro
 - Handle 'other player left' in Game screen
+- User aliases and session scoring
 
 ### Future
+- User accounts and persistent scoring
 - Game handling in an Elixir app
 - Separate, more robust memory storage for game states (e.g. Redis)
